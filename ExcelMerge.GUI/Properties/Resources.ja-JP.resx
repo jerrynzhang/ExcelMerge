@@ -118,259 +118,259 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Button_ExtractDiff" xml:space="preserve">
-    <value>差分抽出</value>
+    <value>只显示差异</value>
   </data>
   <data name="Label_SkipFirstBlankRows" xml:space="preserve">
-    <value>先頭の空行を無視する</value>
+    <value>忽略第一个空白行</value>
   </data>
   <data name="MenuItem_ExeExternalCmd" xml:space="preserve">
-    <value>外部コマンド実行</value>
+    <value>执行外部命令</value>
   </data>
   <data name="MenuItem_ExternalCommands" xml:space="preserve">
-    <value>外部コマンド</value>
+    <value>外部命令</value>
   </data>
   <data name="MenuItem_GeneralSetting" xml:space="preserve">
-    <value>一般設定</value>
+    <value>通用设置</value>
   </data>
   <data name="MenuItem_OpenAsDstFile" xml:space="preserve">
-    <value>右側として開く</value>
+    <value>打开右边的文件</value>
   </data>
   <data name="MenuItem_OpenAsSrcFile" xml:space="preserve">
-    <value>左側として開く</value>
+    <value>打开左边的文件</value>
   </data>
   <data name="MenuItem_OpenDstFile" xml:space="preserve">
-    <value>右側のファイルを開く</value>
+    <value>打开文件到右边</value>
   </data>
   <data name="MenuItem_OpenSrcFile" xml:space="preserve">
-    <value>左側のファイルを開く</value>
+    <value>打开文件到左边</value>
   </data>
   <data name="MenuItem_RecentFiles" xml:space="preserve">
-    <value>最近使ったファイル</value>
+    <value>最近打开的文件</value>
   </data>
   <data name="MenuItem_RecentFileSets" xml:space="preserve">
-    <value>最近使ったファイルセット</value>
+    <value>最近打开的文件对比</value>
   </data>
   <data name="Message_Reboot" xml:space="preserve">
-    <value>変更を適用するには再起動して下さい。</value>
+    <value>请重新启动以应用更改。</value>
   </data>
   <data name="Title_ExternalCommandEditorWindow" xml:space="preserve">
-    <value>外部コマンド編集</value>
+    <value>编辑外部命令</value>
   </data>
   <data name="Title_ExternalCommandsWindow" xml:space="preserve">
-    <value>外部コマンド</value>
+    <value>外部命令</value>
   </data>
   <data name="Title_GeneralSettingWindow" xml:space="preserve">
-    <value>一般設定</value>
+    <value>通用设置</value>
   </data>
   <data name="ToolTip_DstFilePath" xml:space="preserve">
-    <value>右側のファイルパス</value>
+    <value>右边的文件路径</value>
   </data>
   <data name="ToolTip_DstSheet" xml:space="preserve">
-    <value>右側のシート</value>
+    <value>右边的表格</value>
   </data>
   <data name="ToolTip_SrcFilePath" xml:space="preserve">
-    <value>左側のファイルパス</value>
+    <value>左边的文件路径</value>
   </data>
   <data name="ToolTip_SrcSheet" xml:space="preserve">
-    <value>左側のシート</value>
+    <value>左边的文件</value>
   </data>
   <data name="Word_Apply" xml:space="preserve">
-    <value>適用</value>
+    <value>应用</value>
   </data>
   <data name="Word_Args" xml:space="preserve">
-    <value>引数</value>
+    <value>参数</value>
   </data>
   <data name="Word_Cancel" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>取消</value>
   </data>
   <data name="Word_Default" xml:space="preserve">
-    <value>デフォルト</value>
+    <value>默认</value>
   </data>
   <data name="Word_Done" xml:space="preserve">
-    <value>完了</value>
+    <value>确认</value>
   </data>
   <data name="Word_Edit" xml:space="preserve">
-    <value>編集</value>
+    <value>编辑</value>
   </data>
   <data name="Word_English" xml:space="preserve">
-    <value>英語</value>
+    <value>英语</value>
   </data>
   <data name="Word_Executable" xml:space="preserve">
-    <value>実行ファイル</value>
+    <value>可执行文件</value>
   </data>
   <data name="Word_File" xml:space="preserve">
-    <value>ファイル</value>
+    <value>文件</value>
   </data>
-  <data name="Word_Japanese" xml:space="preserve">
-    <value>日本語</value>
+  <data name="Word_Chinese" xml:space="preserve">
+    <value>日语</value>
   </data>
   <data name="Word_Language" xml:space="preserve">
-    <value>言語</value>
+    <value>语言</value>
   </data>
   <data name="Word_Name" xml:space="preserve">
-    <value>名前</value>
+    <value>名字</value>
   </data>
   <data name="Word_Remove" xml:space="preserve">
-    <value>削除</value>
+    <value>删除</value>
   </data>
   <data name="Word_Reset" xml:space="preserve">
-    <value>リセット</value>
+    <value>重置</value>
   </data>
   <data name="Word_Setting" xml:space="preserve">
-    <value>設定</value>
+    <value>设置</value>
   </data>
   <data name="Word_Tool" xml:space="preserve">
-    <value>ツール</value>
+    <value>工具</value>
   </data>
   <data name="ContextMenu_DiffAsHeader" xml:space="preserve">
-    <value>この行を列ヘッダとして差分を抽出する</value>
-  </data>
-  <data name="GroupBox_DisplayFormat" xml:space="preserve">
-    <value>表示形式</value>
-  </data>
-  <data name="Label_RowHeight" xml:space="preserve">
-    <value>行の高さ</value>
-  </data>
-  <data name="Label_ColumnWidth" xml:space="preserve">
-    <value>列の幅</value>
-  </data>
-  <data name="RadioButton_ShowAll" xml:space="preserve">
-    <value>全て</value>
-  </data>
-  <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
-    <value>差分のみ</value>
-  </data>
-  <data name="ToolTip_Swap" xml:space="preserve">
-    <value>左右を入れ替え</value>
-  </data>
-  <data name="Word_Path" xml:space="preserve">
-    <value>パス</value>
-  </data>
-  <data name="Word_Sheet" xml:space="preserve">
-    <value>シート</value>
-  </data>
-  <data name="Word_DstFile" xml:space="preserve">
-    <value>右側のファイル</value>
-  </data>
-  <data name="Word_SrcFile" xml:space="preserve">
-    <value>左側のファイル</value>
-  </data>
-  <data name="Label_AddedColor" xml:space="preserve">
-    <value>追加の色</value>
-  </data>
-  <data name="Label_ColorModifiedRow" xml:space="preserve">
-    <value>変更がある行を色付けする</value>
-  </data>
-  <data name="Label_RowHeaderColor" xml:space="preserve">
-    <value>行ヘッダの色</value>
-  </data>
-  <data name="Label_ColumnHeaderColor" xml:space="preserve">
-    <value>列ヘッダの色</value>
-  </data>
-  <data name="Label_ModifiedColor" xml:space="preserve">
-    <value>変更の色</value>
-  </data>
-  <data name="Label_ModifiedRowColor" xml:space="preserve">
-    <value>変更がある行の色</value>
-  </data>
-  <data name="Label_RemovedColor" xml:space="preserve">
-    <value>削除の色</value>
-  </data>
-  <data name="Label_RowColor" xml:space="preserve">
-    <value>行の色</value>
-  </data>
-  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
-    <value>先頭の空列を無視する</value>
-  </data>
-  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
-    <value>末尾の空列を無視する</value>
-  </data>
-  <data name="Label_TrimLastBlankRows" xml:space="preserve">
-    <value>末尾の空行を無視する</value>
-  </data>
-  <data name="Label_AddedRows" xml:space="preserve">
-    <value>追加された行({0})</value>
-  </data>
-  <data name="Label_ModifiedCells" xml:space="preserve">
-    <value>変更されたセル({0})</value>
-  </data>
-  <data name="Label_ModifiedRows" xml:space="preserve">
-    <value>変更された行({0})</value>
-  </data>
-  <data name="Label_RemovedRows" xml:space="preserve">
-    <value>削除された行({0})</value>
-  </data>
-  <data name="Word_CaseSensitive" xml:space="preserve">
-    <value>大文字小文字を区別する</value>
-  </data>
-  <data name="Word_ExactMatch" xml:space="preserve">
-    <value>完全一致</value>
-  </data>
-  <data name="Word_Regex" xml:space="preserve">
-    <value>正規表現</value>
-  </data>
-  <data name="Word_Search" xml:space="preserve">
-    <value>検索</value>
-  </data>
-  <data name="MenuItem_FileSettings" xml:space="preserve">
-    <value>ファイル設定</value>
-  </data>
-  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
-    <value>ファイル設定編集</value>
-  </data>
-  <data name="Title_FileSettingsWindow" xml:space="preserve">
-    <value>ファイル設定</value>
-  </data>
-  <data name="Word_RowHeaderIndex" xml:space="preserve">
-    <value>行ヘッダインデックス</value>
-  </data>
-  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
-    <value>列ヘッダインデックス</value>
-  </data>
-  <data name="Word_MatchType" xml:space="preserve">
-    <value>マッチタイプ</value>
-  </data>
-  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
-    <value>↑列ヘッダをリセット</value>
-  </data>
-  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
-    <value>←行ヘッダをリセット</value>
-  </data>
-  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
-    <value>↑列ヘッダにセット</value>
+    <value>将此行的差异提取为列标题。</value>
   </data>
   <data name="ContextMenu_SetRowHeader" xml:space="preserve">
-    <value>←行ヘッダにセット</value>
+    <value>←设置行标题</value>
+  </data>
+  <data name="ContextMenu_ResetRowHeader" xml:space="preserve">
+    <value>←重置行标题</value>
+  </data>
+  <data name="ContextMenu_SetColumnHeader" xml:space="preserve">
+    <value>↑设置列标题</value>
+  </data>
+  <data name="ContextMenu_ResetColumnHeader" xml:space="preserve">
+    <value>↑重置列标题</value>
+  </data>
+  <data name="GroupBox_DisplayFormat" xml:space="preserve">
+    <value>显示格式</value>
+  </data>
+  <data name="Label_RowlHeight" xml:space="preserve">
+    <value>行高</value>
+  </data>
+  <data name="Label_ColumnWidth" xml:space="preserve">
+    <value>列宽</value>
+  </data>
+  <data name="RadioButton_ShowAll" xml:space="preserve">
+    <value>所有</value>
+  </data>
+  <data name="RadioButton_ShowOnlyDiff" xml:space="preserve">
+    <value>只显示差异</value>
+  </data>
+  <data name="ToolTip_Swap" xml:space="preserve">
+    <value>左右交换</value>
+  </data>
+  <data name="Word_Path" xml:space="preserve">
+    <value>路径</value>
+  </data>
+  <data name="Word_Sheet" xml:space="preserve">
+    <value>表格</value>
+  </data>
+  <data name="Word_DstFile" xml:space="preserve">
+    <value>右边的文件</value>
+  </data>
+  <data name="Word_SrcFile" xml:space="preserve">
+    <value>左边的文件</value>
+  </data>
+  <data name="Label_AddedColor" xml:space="preserve">
+    <value>添加颜色</value>
+  </data>
+  <data name="Label_ColorModifiedRow" xml:space="preserve">
+    <value>修改行背景颜色</value>
+  </data>
+  <data name="Label_RowHeaderColor" xml:space="preserve">
+    <value>行标题颜色</value>
+  </data>
+  <data name="Label_ColumnHeaderColor" xml:space="preserve">
+    <value>列标题颜色</value>
+  </data>
+  <data name="Label_ModifiedColor" xml:space="preserve">
+    <value>修改颜色</value>
+  </data>
+  <data name="Label_ModifiedRowColor" xml:space="preserve">
+    <value>修改行颜色</value>
+  </data>
+  <data name="Label_RemovedColor" xml:space="preserve">
+    <value>删除颜色</value>
+  </data>
+  <data name="Label_RowColor" xml:space="preserve">
+    <value>行颜色</value>
+  </data>
+  <data name="Label_SkipFirstBlankColumns" xml:space="preserve">
+    <value>忽略第一个空白列</value>
+  </data>
+  <data name="Label_TrimLastBlankColumns" xml:space="preserve">
+    <value>忽略最后的空白列</value>
+  </data>
+  <data name="Label_TrimLastBlankRows" xml:space="preserve">
+    <value>忽略最后的空白行</value>
+  </data>
+  <data name="Label_AddedRows" xml:space="preserve">
+    <value>添加行({0})</value>
+  </data>
+  <data name="Label_ModifiedCells" xml:space="preserve">
+    <value>修改单元格({0})</value>
+  </data>
+  <data name="Label_ModifiedRows" xml:space="preserve">
+    <value>修改行({0})</value>
+  </data>
+  <data name="Label_RemovedRows" xml:space="preserve">
+    <value>删除行({0})</value>
+  </data>
+  <data name="Word_CaseSensitive" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="Word_ExactMatch" xml:space="preserve">
+    <value>完全相同</value>
+  </data>
+  <data name="Word_Regex" xml:space="preserve">
+    <value>正则表达式</value>
+  </data>
+  <data name="Word_Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="MenuItem_FileSettings" xml:space="preserve">
+    <value>文件设置</value>
+  </data>
+  <data name="Title_FileSettingEditorWindow" xml:space="preserve">
+    <value>编辑文件设置</value>
+  </data>
+  <data name="Title_FileSettingsWindow" xml:space="preserve">
+    <value>文件设置</value>
+  </data>
+  <data name="Word_RowHeaderIndex" xml:space="preserve">
+    <value>行标题索引</value>
+  </data>
+  <data name="Word_ColumnHeaderIndex" xml:space="preserve">
+    <value>列标题索引</value>
+  </data>
+  <data name="Word_MatchType" xml:space="preserve">
+    <value>匹配方式</value>
   </data>
   <data name="Word_Font" xml:space="preserve">
-    <value>フォント</value>
+    <value>字体</value>
   </data>
   <data name="Word_MaxRowHeaderWidth" xml:space="preserve">
-    <value>列ヘッダの最大幅</value>
+    <value>最大行标题宽度</value>
   </data>
   <data name="Msg_ExtractingDiff" xml:space="preserve">
-    <value>差分を抽出しています</value>
+    <value>显示差异...</value>
   </data>
   <data name="Msg_ReadingFiles" xml:space="preserve">
-    <value>ファイルを読み込んでいます</value>
+    <value>读取文件 ...</value>
   </data>
   <data name="Msg_WarnSize" xml:space="preserve">
-    <value>行数が多すぎます。差異が存在する行の周辺だけを表示します。</value>
+    <value>记录太多，只显示差异</value>
   </data>
   <data name="Word_RowHeaderName" xml:space="preserve">
-    <value>行ヘッダ名</value>
+    <value>行标题名称</value>
   </data>
   <data name="ContextMenu_BuildCellBaseLog" xml:space="preserve">
-    <value>ログを出力</value>
+    <value>输出日志</value>
   </data>
   <data name="ContextMenu_BuildColumnBaseLog" xml:space="preserve">
-    <value>列ベースのログを作成</value>
+    <value>创建基于列的日志</value>
   </data>
   <data name="ContextMenu_BuildRowBaseLog" xml:space="preserve">
-    <value>行ベースのログを作成</value>
+    <value>创建基于行的日志</value>
   </data>
   <data name="DefaultLogFormat" xml:space="preserve">
-    <value>"${ROW}" の "${COL}" を "${LEFT}" から "${RIGHT}" に変更</value>
+    <value>将 "${ROW}" 的 "${COL}" 从 "${LEFT}" 更改为 "${RIGHT}"</value>
   </data>
   <data name="DefaultColumnBaseLogFormat" xml:space="preserve">
     <value>${LEFT} → ${RIGHT}</value>
@@ -379,25 +379,25 @@
     <value>${LEFT} → ${RIGHT}</value>
   </data>
   <data name="Label_LogFormat" xml:space="preserve">
-    <value>変更されたセルのログのフォーマット</value>
+    <value>修改的单元格日志格式</value>
   </data>
   <data name="Label_ColumnBaseLogFormat" xml:space="preserve">
-    <value>列ベースのログのフォーマット</value>
+    <value>基于列的日志格式</value>
   </data>
   <data name="Label_RowBaseLogFormat" xml:space="preserve">
-    <value>行ベースのログのフォーマット</value>
+    <value>基于行的日志格式</value>
   </data>
   <data name="MenuItem_Console" xml:space="preserve">
-    <value>コンソール</value>
+    <value>日志</value>
   </data>
   <data name="MenuItem_View" xml:space="preserve">
-    <value>表示</value>
+    <value>窗口</value>
   </data>
   <data name="Msg_Undisplayable" xml:space="preserve">
-    <value>※表示できません</value>
+    <value>不会显示</value>
   </data>
   <data name="Shortcut_Ctrl_Down" xml:space="preserve">
-    <value>Ctrl +↓</value>
+    <value>Ctrl + Down</value>
   </data>
   <data name="Shortcut_Ctrl_I" xml:space="preserve">
     <value>Ctrl + I</value>
@@ -409,16 +409,16 @@
     <value>Ctrl + L</value>
   </data>
   <data name="Shortcut_Ctrl_Left" xml:space="preserve">
-    <value>Ctrl +←</value>
+    <value>Ctrl + Left</value>
   </data>
   <data name="Shortcut_Ctrl_O" xml:space="preserve">
     <value>Ctrl + O</value>
   </data>
   <data name="Shortcut_Ctrl_Right" xml:space="preserve">
-    <value>Ctrl + →</value>
+    <value>Ctrl + Right</value>
   </data>
   <data name="Shortcut_Ctrl_Up" xml:space="preserve">
-    <value>Ctrl +↑</value>
+    <value>Ctrl + Up</value>
   </data>
   <data name="Shortcut_F8" xml:space="preserve">
     <value>F8</value>
@@ -430,71 +430,74 @@
     <value>空白</value>
   </data>
   <data name="DefaultLogFormatAddedRow" xml:space="preserve">
-    <value>"${ROW}" を追加</value>
+    <value>"${ROW}" 已添加。</value>
   </data>
   <data name="DefaultLogFormatRemovedRow" xml:space="preserve">
-    <value>"${ROW}" を削除</value>
+    <value>"${ROW}" 已删除。</value>
   </data>
   <data name="Label_AddedRowLogFormat" xml:space="preserve">
-    <value>追加された行のログのフォーマット</value>
+    <value>添加行日志格式</value>
   </data>
   <data name="Label_RemovedRowLogFormat" xml:space="preserve">
-    <value>削除された行のログのフォーマット</value>
+    <value>删除行日志格式</value>
   </data>
   <data name="Label_IgnoreFileSetting" xml:space="preserve">
-    <value>ファイル設定を適用しない</value>
+    <value>忽略文件设置</value>
   </data>
   <data name="Msg_OutofSheetRange" xml:space="preserve">
-    <value>適用されたファイル設定のシートインデックスが範囲外です。
-インデックス0のシートを比較します。
-ファイル設定を適用しない場合は、「ファイル設定を適用しない」を有効にして下さい。</value>
+    <value>应用文件设置后表格索引超出范围。
+将使用第一张表。
+如果您不想应用文件设置，请弃用“忽略文件设置”。</value>
   </data>
   <data name="Word_SheetIndex" xml:space="preserve">
-    <value>シートインデックス</value>
+    <value>表格索引</value>
   </data>
   <data name="Word_SheetName" xml:space="preserve">
-    <value>シート名</value>
+    <value>表格名称</value>
   </data>
   <data name="Word_StartupSheet" xml:space="preserve">
-    <value>起動時の比較シートにする</value>
+    <value>设置为启动时的对照表</value>
   </data>
   <data name="GroupBox_LogFormat" xml:space="preserve">
-    <value>ログ形式</value>
+    <value>日志格式</value>
   </data>
   <data name="GroupBox_ReadSetting" xml:space="preserve">
-    <value>読み込み設定</value>
+    <value>读取设定</value>
   </data>
   <data name="GroupBox_Style" xml:space="preserve">
-    <value>スタイル</value>
+    <value>样式</value>
   </data>
   <data name="Label_NotifyEqual" xml:space="preserve">
-    <value>差分が存在しないときにダイアログを表示する</value>
+    <value>如果没有差异显示对话框</value>
   </data>
   <data name="Message_NoDiff" xml:space="preserve">
-    <value>差分は存在しません。</value>
+    <value>没有区别。</value>
   </data>
   <data name="GroupBox_Behavior" xml:space="preserve">
-    <value>動作</value>
+    <value>操作</value>
   </data>
   <data name="Label_AlwaysExpandCellDiff" xml:space="preserve">
-    <value>常にセルの差分を展開する</value>
+    <value>总是扩展显示单元格差异</value>
   </data>
   <data name="Label_FitRowHeight" xml:space="preserve">
-    <value>行の高さを自動で調整する</value>
+    <value>匹配单元格高度</value>
   </data>
   <data name="Label_MaxRowHeight" xml:space="preserve">
-    <value>行の高さ(最大)</value>
+    <value>最大行高</value>
   </data>
   <data name="Label_MinRowHeight" xml:space="preserve">
-    <value>行の高さ(最小)</value>
+    <value>最小行高</value>
   </data>
   <data name="Label_FocusFirstDiff" xml:space="preserve">
-    <value>差分抽出後に最初の差分に移動する</value>
+    <value>查看差异时自动聚焦于第一个差异</value>
   </data>
   <data name="ContextMenu_CopyAsCsv" xml:space="preserve">
-    <value>CSV形式でコピー</value>
+    <value>以CSV格式复制</value>
   </data>
   <data name="ContextMenu_CopyAsTsv" xml:space="preserve">
-    <value>TSV形式でコピー</value>
+    <value>以TSV格式复制</value>
+  </data>
+  <data name="Word_Chinese" xml:space="preserve">
+    <value>中文</value>
   </data>
 </root>
