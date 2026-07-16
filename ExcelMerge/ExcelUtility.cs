@@ -120,7 +120,17 @@ namespace ExcelMerge
         {
             try
             {
-                return WorkbookFactory.Create(path) is HSSFWorkbook;
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    var header = new byte[8];
+                    if (fs.Read(header, 0, 8) < 8)
+                        return false;
+
+                    // OLE2 Compound Document magic bytes: D0 CF 11 E0 A1 B1 1A E1
+                    return header[0] == 0xD0 && header[1] == 0xCF && header[2] == 0x11
+                        && header[3] == 0xE0 && header[4] == 0xA1 && header[5] == 0xB1
+                        && header[6] == 0x1A && header[7] == 0xE1;
+                }
             }
             catch
             {
@@ -132,7 +142,16 @@ namespace ExcelMerge
         {
             try
             {
-                return WorkbookFactory.Create(path) is XSSFWorkbook;
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    var header = new byte[4];
+                    if (fs.Read(header, 0, 4) < 4)
+                        return false;
+
+                    // ZIP/Office Open XML magic bytes: 50 4B 03 04
+                    return header[0] == 0x50 && header[1] == 0x4B
+                        && header[2] == 0x03 && header[3] == 0x04;
+                }
             }
             catch
             {

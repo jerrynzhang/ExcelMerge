@@ -72,10 +72,10 @@ namespace ExcelMerge
         public void TrimFirstBlankColumns()
         {
             var columns = CreateColumns();
-            var indices = columns.Select((v, i) => new { v, i }).TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
+            var indices = columns.Select((v, i) => new { v, i }).TakeWhile(c => c.v.IsBlank()).Select(c => c.i).ToList();
 
-            foreach (var i in indices)
-                RemoveColumn(i);
+            if (indices.Count > 0)
+                RemoveColumns(indices);
         }
 
         public void TrimLastBlankRows()
@@ -94,10 +94,10 @@ namespace ExcelMerge
         public void TrimLastBlankColumns()
         {
             var columns = CreateColumns();
-            var indices = columns.Select((v, i) => new { v, i }).Reverse().TakeWhile(c => c.v.IsBlank()).Select(c => c.i);
+            var indices = columns.Select((v, i) => new { v, i }).Reverse().TakeWhile(c => c.v.IsBlank()).Select(c => c.i).ToList();
 
-            foreach (var i in indices)
-                RemoveColumn(i);
+            if (indices.Count > 0)
+                RemoveColumns(indices);
         }
 
         public void RemoveColumn(int column)
@@ -106,6 +106,25 @@ namespace ExcelMerge
             {
                 if (row.Value.Cells.Count > column)
                     row.Value.Cells.RemoveAt(column);
+            }
+        }
+
+        public void RemoveColumns(IEnumerable<int> columns)
+        {
+            var sortedColumns = new SortedSet<int>(columns);
+
+            foreach (var row in Rows)
+            {
+                var cells = row.Value.Cells;
+                if (cells.Count == 0)
+                    continue;
+
+                // Remove from the end to avoid index shifting issues
+                foreach (var col in sortedColumns.Reverse())
+                {
+                    if (col < cells.Count)
+                        cells.RemoveAt(col);
+                }
             }
         }
 
@@ -130,39 +149,33 @@ namespace ExcelMerge
             option.EqualityComparer =
                 new RowComparer(new HashSet<int>(columnStatusMap.Where(i => i.Value != ExcelColumnStatus.None).Select(i => i.Key)));
 
+            // Shift cells for column alignment without creating intermediate queues
+            var maxColumnIndex = columnStatusMap.Any() ? columnStatusMap.Keys.Max() + 1 : 0;
             foreach (var row in src.Rows.Values)
             {
-                var shifted = new List<ExcelCell>();
-                var index = 0;
-                var queue = new Queue<ExcelCell>(row.Cells);
-                while (queue.Any())
+                var shifted = new List<ExcelCell>(maxColumnIndex);
+                int cellIdx = 0;
+                for (int i = 0; i < maxColumnIndex && cellIdx < row.Cells.Count; i++)
                 {
-                    if (columnStatusMap[index] == ExcelColumnStatus.Inserted)
+                    if (columnStatusMap.TryGetValue(i, out var status) && status == ExcelColumnStatus.Inserted)
                         shifted.Add(new ExcelCell(string.Empty, 0, 0));
                     else
-                        shifted.Add(queue.Dequeue());
-
-                    index++;
+                        shifted.Add(row.Cells[cellIdx++]);
                 }
-
                 row.UpdateCells(shifted);
             }
 
             foreach (var row in dst.Rows.Values)
             {
-                var shifted = new List<ExcelCell>();
-                var index = 0;
-                var queue = new Queue<ExcelCell>(row.Cells);
-                while (queue.Any())
+                var shifted = new List<ExcelCell>(maxColumnIndex);
+                int cellIdx = 0;
+                for (int i = 0; i < maxColumnIndex && cellIdx < row.Cells.Count; i++)
                 {
-                    if (columnStatusMap[index] == ExcelColumnStatus.Deleted)
+                    if (columnStatusMap.TryGetValue(i, out var status) && status == ExcelColumnStatus.Deleted)
                         shifted.Add(new ExcelCell(string.Empty, 0, 0));
                     else
-                        shifted.Add(queue.Dequeue());
-
-                    index++;
+                        shifted.Add(row.Cells[cellIdx++]);
                 }
-
                 row.UpdateCells(shifted);
             }
 
@@ -171,17 +184,24 @@ namespace ExcelMerge
             var resultArray = DiffUtil.OptimizeCaseDeletedFirst(r).ToArray();
             if (resultArray.Length > 10000)
             {
-                var count = 0;
-                var indices = Enumerable.Range(0, 100).ToList();
-                foreach (var result in resultArray)
-                {
-                    if (result.Status != DiffStatus.Equal)
-                        indices.AddRange(Enumerable.Range(Math.Max(0, count - 100), 200));
+                var indices = new HashSet<int>();
+                // Always include first 100 rows
+                for (int i = 0; i < 100 && i < resultArray.Length; i++)
+                    indices.Add(i);
 
-                    count++;
+                for (int i = 0; i < resultArray.Length; i++)
+                {
+                    if (resultArray[i].Status != DiffStatus.Equal)
+                    {
+                        // Include 100 rows before and after each diff
+                        int start = Math.Max(0, i - 100);
+                        int end = Math.Min(resultArray.Length - 1, i + 100);
+                        for (int j = start; j <= end; j++)
+                            indices.Add(j);
+                    }
                 }
-                indices = indices.Distinct().ToList();
-                resultArray = indices.Where(i => i < resultArray.Length).Select(i => resultArray[i]).ToArray();
+
+                resultArray = indices.OrderBy(i => i).Select(i => resultArray[i]).ToArray();
             }
 
             var sheetDiff = new ExcelSheetDiff();
@@ -235,20 +255,19 @@ namespace ExcelMerge
 
             var columnCount = Rows.Max(r => r.Value.Cells.Count);
             var columns = new ExcelColumn[columnCount];
+            for (int i = 0; i < columnCount; i++)
+                columns[i] = new ExcelColumn();
+
             foreach (var row in Rows)
             {
-                var columnIndex = 0;
-                foreach (var cell in row.Value.Cells)
+                var cells = row.Value.Cells;
+                for (int columnIndex = 0; columnIndex < cells.Count; columnIndex++)
                 {
-                    if (columns[columnIndex] == null)
-                        columns[columnIndex] = new ExcelColumn();
-
-                    columns[columnIndex].Cells.Add(cell);
-                    columnIndex++;
+                    columns[columnIndex].Cells.Add(cells[columnIndex]);
                 }
             }
 
-            return columns.AsEnumerable();
+            return columns;
         }
 
         private static void DiffCells(

@@ -6,6 +6,8 @@ namespace ExcelMerge
 {
     public class ExcelColumn : IEquatable<ExcelColumn>
     {
+        private int? cachedHashCode;
+
         public List<ExcelCell> Cells { get; private set; }
         public int HeaderIndex { get; set; }
 
@@ -28,12 +30,16 @@ namespace ExcelMerge
 
         public override int GetHashCode()
         {
+            if (cachedHashCode.HasValue)
+                return cachedHashCode.Value;
+
             var hash = 7;
             foreach (var cell in Cells)
             {
-                hash = hash * 13 + cell.Value.GetHashCode();
+                hash = hash * 13 + (cell.Value?.GetHashCode() ?? 0);
             }
 
+            cachedHashCode = hash;
             return hash;
         }
 
@@ -42,7 +48,16 @@ namespace ExcelMerge
             if (other == null)
                 return false;
 
-            return GetHashCode() == other.GetHashCode();
+            if (Cells.Count != other.Cells.Count)
+                return false;
+
+            for (int i = 0; i < Cells.Count; i++)
+            {
+                if (!string.Equals(Cells[i].Value, other.Cells[i].Value, StringComparison.Ordinal))
+                    return false;
+            }
+
+            return true;
         }
 
         public bool IsBlank()
@@ -55,15 +70,19 @@ namespace ExcelMerge
     {
         public bool Equals(ExcelColumn x, ExcelColumn y)
         {
+            if (x == null || y == null)
+                return false;
+
             var valueX = x.Cells.ElementAtOrDefault(x.HeaderIndex)?.Value ?? string.Empty;
             var valueY = y.Cells.ElementAtOrDefault(y.HeaderIndex)?.Value ?? string.Empty;
 
-            return valueX.Equals(valueY);
+            return string.Equals(valueX, valueY, StringComparison.Ordinal);
         }
 
         public int GetHashCode(ExcelColumn obj)
         {
-            return obj.Cells.ElementAtOrDefault(obj.HeaderIndex)?.Value.GetHashCode() ?? string.Empty.GetHashCode();
+            var value = obj.Cells.ElementAtOrDefault(obj.HeaderIndex)?.Value ?? string.Empty;
+            return value.GetHashCode();
         }
     }
 }

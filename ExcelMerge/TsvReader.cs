@@ -13,10 +13,10 @@ namespace ExcelMerge
                 var rowIndex = 0;
                 while (!sr.EndOfStream)
                 {
-                    var columnIndex = 0;
                     var cells = new List<ExcelCell>();
-                    foreach (var c in sr.ReadLine().Split('\t'))
-                        cells.Add(new ExcelCell(c, columnIndex, rowIndex));
+                    var values = sr.ReadLine().Split('\t');
+                    for (int columnIndex = 0; columnIndex < values.Length; columnIndex++)
+                        cells.Add(new ExcelCell(values[columnIndex], columnIndex, rowIndex));
 
                     yield return new ExcelRow(rowIndex++, cells);
                 }
