@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using Prism.Mvvm;
-using Prism.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public class DiffExtractionSettingWindowViewModel : BindableBase
+    public class DiffExtractionSettingWindowViewModel : ObservableObject
     {
         private ApplicationSetting originalSetting;
 
@@ -39,12 +39,12 @@ namespace ExcelMerge.GUI.ViewModels
             get { return System.Drawing.FontFamily.Families.Select(f => f.Name).ToList(); }
         }
 
-        public DelegateCommand<Window> DoneCommand { get; private set; }
-        public DelegateCommand ResetCommand { get; private set; }
-        public DelegateCommand ApplyCommand { get; private set; }
-        public DelegateCommand<object> EditAlternationColorCommand { get; private set; }
-        public DelegateCommand<int?> RemoveAlternationColorCommand { get; private set; }
-        public DelegateCommand<Color?> AddAlternationColorCommand { get; private set; }
+        public RelayCommand<Window> DoneCommand { get; private set; }
+        public RelayCommand ResetCommand { get; private set; }
+        public RelayCommand ApplyCommand { get; private set; }
+        public RelayCommand<object> EditAlternationColorCommand { get; private set; }
+        public RelayCommand<int?> RemoveAlternationColorCommand { get; private set; }
+        public RelayCommand<Color?> AddAlternationColorCommand { get; private set; }
 
         public DiffExtractionSettingWindowViewModel()
         {
@@ -55,13 +55,13 @@ namespace ExcelMerge.GUI.ViewModels
 
             Setting.PropertyChanged += Setting_PropertyChanged;
 
-            DoneCommand = new DelegateCommand<Window>(Done);
-            ResetCommand = new DelegateCommand(Reset);
-            ApplyCommand = new DelegateCommand(Apply);
+            DoneCommand = new RelayCommand<Window>(Done);
+            ResetCommand = new RelayCommand(Reset);
+            ApplyCommand = new RelayCommand(Apply);
 
-            EditAlternationColorCommand = new DelegateCommand<object>(EditAlternationColor);
-            RemoveAlternationColorCommand = new DelegateCommand<int?>(RemoveAlternationColor);
-            AddAlternationColorCommand = new DelegateCommand<Color?>(AddAlternationColor);
+            EditAlternationColorCommand = new RelayCommand<object>(EditAlternationColor);
+            RemoveAlternationColorCommand = new RelayCommand<int?>(RemoveAlternationColor);
+            AddAlternationColorCommand = new RelayCommand<Color?>(AddAlternationColor);
         }
 
         private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

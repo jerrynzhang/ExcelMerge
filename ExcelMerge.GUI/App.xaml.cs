@@ -14,7 +14,7 @@ namespace ExcelMerge.GUI
 
         public event Action OnSettingUpdated;
 
-        [STAThread()]
+        [STAThread]
         public static void Main()
         {
             App app = new App();
@@ -59,8 +59,10 @@ namespace ExcelMerge.GUI
 
         private ICommand CreateCommand(string[] args)
         {
-            if (CommandLine.Parser.Default.ParseArguments(args, CommandLineOption))
+            var result = CommandLine.Parser.Default.ParseArguments<CommandLineOption>(args);
+            if (result.Tag == CommandLine.ParserResultType.Parsed)
             {
+                CommandLineOption = ((CommandLine.Parsed<CommandLineOption>)result).Value;
                 StoreOption();
                 CommandLineOption.ConvertToFullPath();
                 return CommandFactory.Create(CommandLineOption);

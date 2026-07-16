@@ -8,8 +8,8 @@ namespace ExcelMerge.GUI.Commands
 {
     public class CommandLineOption
     {
-        [ValueList(typeof(List<string>))]
-        public IList<string> Commands { get; set; } = new List<string>();
+        [Value(0)]
+        public IEnumerable<string> Commands { get; set; } = new List<string>();
 
         [Option('s', "src-path")]
         public string SrcPath { get; set; } = string.Empty;

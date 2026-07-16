@@ -359,7 +359,7 @@ namespace ExcelMerge.GUI.Settings
 
         private static void Serialize(ApplicationSetting setting, string path)
         {
-            var serializer = new SerializerBuilder().EmitDefaults().Build();
+            var serializer = new SerializerBuilder().Build();
             var yml = serializer.Serialize(setting);
             using (var sr = new StreamWriter(path))
             {

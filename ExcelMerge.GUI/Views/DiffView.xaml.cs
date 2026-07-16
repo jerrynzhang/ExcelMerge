@@ -9,10 +9,9 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Practices.Unity;
+using Microsoft.Extensions.DependencyInjection;
 using FastWpfGrid;
 using NetDiff;
-using SKCore.Collection;
 using ExcelMerge.GUI.ViewModels;
 using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.Models;
@@ -23,7 +22,7 @@ namespace ExcelMerge.GUI.Views
     public partial class DiffView : UserControl
     {
         private ExcelSheetDiffConfig diffConfig = new ExcelSheetDiffConfig();
-        private IUnityContainer container;
+        private IServiceProvider container;
         private const string srcKey = "src";
         private const string dstKey = "dst";
 
@@ -50,16 +49,16 @@ namespace ExcelMerge.GUI.Views
 
         private void InitializeContainer()
         {
-            container = new UnityContainer();
-            container
-                .RegisterInstance(srcKey, SrcDataGrid)
-                .RegisterInstance(dstKey, DstDataGrid)
-                .RegisterInstance(srcKey, SrcLocationGrid)
-                .RegisterInstance(dstKey, DstLocationGrid)
-                .RegisterInstance(srcKey, SrcViewRectangle)
-                .RegisterInstance(dstKey, DstViewRectangle)
-                .RegisterInstance(srcKey, SrcValueTextBox)
-                .RegisterInstance(dstKey, DstValueTextBox);
+            var services = new ServiceCollection();
+            services.AddKeyedSingleton(srcKey, SrcDataGrid);
+            services.AddKeyedSingleton(dstKey, DstDataGrid);
+            services.AddKeyedSingleton(srcKey, SrcLocationGrid);
+            services.AddKeyedSingleton(dstKey, DstLocationGrid);
+            services.AddKeyedSingleton(srcKey, SrcViewRectangle);
+            services.AddKeyedSingleton(dstKey, DstViewRectangle);
+            services.AddKeyedSingleton(srcKey, SrcValueTextBox);
+            services.AddKeyedSingleton(dstKey, DstValueTextBox);
+            container = services.BuildServiceProvider();
         }
 
         private void InitializeEventListeners()

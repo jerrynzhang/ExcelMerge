@@ -2,7 +2,6 @@
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Practices.Unity;
 using FastWpfGrid;
 using ExcelMerge.GUI.Settings;
 

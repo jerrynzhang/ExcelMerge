@@ -4,14 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.IO;
 using System.Windows;
-using Prism.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FastWpfGrid;
 using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.Behaviors;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public class DiffViewModel : BindableBase
+    public class DiffViewModel : ObservableObject
     {
         private bool showLocationGridLine;
         public bool ShowLocationGridLine

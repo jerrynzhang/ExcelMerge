@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -7,10 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using FastWpfGrid;
-using Microsoft.Practices.Unity;
-using SKCore.Collection;
-using SKCore.Wpf.Controls.Utilities;
 using ExcelMerge.GUI.Models;
 using ExcelMerge.GUI.Settings;
 
@@ -29,7 +27,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnParentLoaded(DiffViewEventArgs<FastGridControl> e)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 var a = new DiffViewEventArgs<FastGridControl>(grid, e.Container);
 
@@ -48,7 +46,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnPreExecuteDiff(DiffViewEventArgs<FastGridControl> e)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 grid.Model = null;
                 grid.ScrollIntoView(FastGridCellAddress.Empty);
@@ -67,7 +65,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnFileSettingUpdated(DiffViewEventArgs<FastGridControl> e, FileSetting fileSetting)
         {
-            if (e.Sender != e.Container.Resolve<FastGridControl>(Key))
+            if (e.Sender != e.Container.GetKeyedService<FastGridControl>(Key))
                 return;
 
             if (fileSetting != null)
@@ -88,7 +86,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnApplicationSettingUpdated(DiffViewEventArgs<FastGridControl> e)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 grid.AlternatingColors = App.Instance.Setting.AlternatingColors;
                 grid.CellFontName = App.Instance.Setting.FontName;
@@ -101,7 +99,7 @@ namespace ExcelMerge.GUI.Views
                 DataGridEventDispatcher.Instance.DispatchModelUpdateEvent(args);
             }
 
-            foreach (var textBox in e.Container.ResolveAll<RichTextBox>())
+            foreach (var textBox in e.Container.GetAllKeyedServices<RichTextBox>("src", "dst"))
             {
                 var args = new DiffViewEventArgs<RichTextBox>(textBox, e.Container);
                 ValueTextBoxEventDispatcher.Instance.DispatchLostFocusEvent(args);
@@ -112,32 +110,32 @@ namespace ExcelMerge.GUI.Views
 
         public void OnScrolled(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
+            var dataGrid = e.Container.GetKeyedService<FastGridControl>(Key);
 
             if (dataGrid == null || dataGrid == e.Sender)
                 return;
 
             SyncScroll(e.Sender, dataGrid);
-            RecalculateViewport(e.Container.Resolve<Rectangle>(Key), dataGrid);
+            RecalculateViewport(e.Container.GetKeyedService<Rectangle>(Key), dataGrid);
         }
 
         public void OnSizeChanged(DiffViewEventArgs<FastGridControl> e, SizeChangedEventArgs se)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
+            var dataGrid = e.Container.GetKeyedService<FastGridControl>(Key);
 
             if (dataGrid == null || dataGrid != e.Sender)
                 return;
 
-            RecalculateViewport(e.Container.Resolve<Rectangle>(Key), dataGrid);
+            RecalculateViewport(e.Container.GetKeyedService<Rectangle>(Key), dataGrid);
         }
 
         public void OnModelUpdated(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
+            var dataGrid = e.Container.GetKeyedService<FastGridControl>(Key);
             if (e.Sender.Model == null || e.Sender != dataGrid)
                 return;
 
-            var locationGrid = e.Container.Resolve<Grid>(Key);
+            var locationGrid = e.Container.GetKeyedService<Grid>(Key);
             if (locationGrid == null)
                 return;
 
@@ -145,7 +143,7 @@ namespace ExcelMerge.GUI.Views
             var colCount = e.Sender.Model.ColumnCount;
             UpdateLocationGridDefinisions(locationGrid, locationGrid.RenderSize, rowCount, colCount);
 
-            var viewport = e.Container.Resolve<Rectangle>(Key);
+            var viewport = e.Container.GetKeyedService<Rectangle>(Key);
             RecalculateViewport(viewport, e.Sender);
 
             var colorMap = CreateColorMap(e.Sender);
@@ -156,7 +154,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnSelectedCellChanged(DiffViewEventArgs<FastGridControl> e)
         {
-            var dataGrid = e.Container.Resolve<FastGridControl>(Key);
+            var dataGrid = e.Container.GetKeyedService<FastGridControl>(Key);
             if (e.Sender == dataGrid)
                 return;
 
@@ -177,14 +175,14 @@ namespace ExcelMerge.GUI.Views
                 }
             }
 
-            var valuteTextBox = e.Container.ResolveAll<RichTextBox>();
+            var valuteTextBox = e.Container.GetAllKeyedServices<RichTextBox>("src", "dst");
         }
 
         public void OnColumnHeaderChanged(DiffViewEventArgs<FastGridControl> e)
         {
             var row = e.Sender.CurrentCell.Row;
 
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 (grid.Model as DiffGridModel).SetColumnHeader(row);
                 grid.NotifyRefresh();
@@ -193,7 +191,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnColumnHeaderReset(DiffViewEventArgs<FastGridControl> e)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 (grid.Model as DiffGridModel).SetColumnHeader(0);
                 grid.NotifyRefresh();
@@ -204,7 +202,7 @@ namespace ExcelMerge.GUI.Views
         {
             var column = e.Sender.CurrentCell.Column;
 
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 (grid.Model as DiffGridModel).SetRowHeader(column);
                 grid.NotifyRefresh();
@@ -213,7 +211,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnRowHeaderReset(DiffViewEventArgs<FastGridControl> e)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 (grid.Model as DiffGridModel).SetRowHeader(-1);
                 grid.NotifyRefresh();
@@ -222,7 +220,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnDiffDisplayFormatChanged(DiffViewEventArgs<FastGridControl> e, bool onlyDiff)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 if (onlyDiff)
 
@@ -241,7 +239,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnColumnWidthChanged(DiffViewEventArgs<FastGridControl> e, ColumnWidthChangedEventArgs ce)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 if (grid == e.Sender)
                     continue;
@@ -252,7 +250,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnHoverRowChanged(DiffViewEventArgs<FastGridControl> e, HoverRowChangedEventArgs he)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 if (e.Sender == grid)
                     continue;
@@ -263,7 +261,7 @@ namespace ExcelMerge.GUI.Views
 
         public void OnFontSizeChanged(DiffViewEventArgs<FastGridControl> e, FontSizeChangedEventArgs fe)
         {
-            foreach (var grid in e.Container.ResolveAll<FastGridControl>())
+            foreach (var grid in e.Container.GetAllKeyedServices<FastGridControl>("src", "dst"))
             {
                 if (e.Sender == grid)
                     continue;
@@ -280,10 +278,10 @@ namespace ExcelMerge.GUI.Views
 
         public void OnMouseDown(DiffViewEventArgs<Grid> e, MouseEventArgs me)
         {
-            if (e.Sender != e.Container.Resolve<Grid>(Key))
+            if (e.Sender != e.Container.GetKeyedService<Grid>(Key))
                 return;
 
-            var viewport = e.Container.Resolve<Rectangle>(Key);
+            var viewport = e.Container.GetKeyedService<Rectangle>(Key);
 
             var rowSpan = Grid.GetRowSpan(viewport);
             var currentRow = Grid.GetRow(viewport);
@@ -318,10 +316,10 @@ namespace ExcelMerge.GUI.Views
 
         public void OnMouseWheel(DiffViewEventArgs<Grid> e, MouseWheelEventArgs me)
         {
-            if (e.Sender != e.Container.Resolve<Grid>(Key))
+            if (e.Sender != e.Container.GetKeyedService<Grid>(Key))
                 return;
 
-            var viewport = e.Container.Resolve<Rectangle>(Key);
+            var viewport = e.Container.GetKeyedService<Rectangle>(Key);
 
             var rowSpan = Grid.GetRowSpan(viewport);
             var currentRow = Grid.GetRow(viewport);
@@ -352,7 +350,7 @@ namespace ExcelMerge.GUI.Views
             var row = Grid.GetRow(e.Sender);
             var col = Grid.GetColumn(e.Sender);
 
-            e.Container.Resolve<FastGridControl>(Key).Scroll(row, col, row, col);
+            e.Container.GetKeyedService<FastGridControl>(Key).Scroll(row, col, row, col);
         }
 
         #endregion
@@ -362,23 +360,24 @@ namespace ExcelMerge.GUI.Views
         public void OnGotFocus(DiffViewEventArgs<RichTextBox> e)
         {
             var margin = 10;
-            var textHeightList = e.Container.ResolveAll<RichTextBox>().Select(rtb => CalculateTextBoxHeight(rtb) + margin);
+            var textBoxes = e.Container.GetAllKeyedServices<RichTextBox>("src", "dst").ToList();
+            var textHeightList = textBoxes.Select(rtb => CalculateTextBoxHeight(rtb) + margin);
 
             var height = Math.Min(textHeightList.Max(), App.Instance.MainWindow.Height / 3);
 
-            foreach (var rtb in e.Container.ResolveAll<RichTextBox>())
+            foreach (var rtb in textBoxes)
                 rtb.Height = height;
         }
 
         public void OnLostFocus(DiffViewEventArgs<RichTextBox> e)
         {
-            foreach (var rtb in e.Container.ResolveAll<RichTextBox>())
+            foreach (var rtb in e.Container.GetAllKeyedServices<RichTextBox>("src", "dst"))
                 rtb.Height = 30d;
         }
 
         public void OnScrolled(DiffViewEventArgs<RichTextBox> e, ScrollChangedEventArgs se)
         {
-            foreach (var rtb in e.Container.ResolveAll<RichTextBox>())
+            foreach (var rtb in e.Container.GetAllKeyedServices<RichTextBox>("src", "dst"))
             {
                 rtb.ScrollToVerticalOffset(se.VerticalOffset);
                 rtb.ScrollToHorizontalOffset(se.HorizontalOffset);
@@ -389,9 +388,9 @@ namespace ExcelMerge.GUI.Views
 
         #region
 
-        private void SyncRowHeight(IUnityContainer container)
+        private void SyncRowHeight(IServiceProvider container)
         {
-            var grids = container.ResolveAll<FastGridControl>();
+            var grids = container.GetAllKeyedServices<FastGridControl>("src", "dst").ToList();
             if (!grids.Any())
                 return;
 

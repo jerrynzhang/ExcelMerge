@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Prism.Mvvm;
-using Prism.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ExcelMerge.GUI.Views;
 using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.ValueConverters;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : ObservableObject
     {
         private ContentControl content;
         public ContentControl Content
@@ -69,15 +69,15 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref cultureName, value); }
         }
 
-        public DelegateCommand<ExternalCommand> ExecuteExternalCommandCommand { get; private set; }
-        public DelegateCommand OpenExternalCommandsWindowCommand { get; private set; }
-        public DelegateCommand OpenFileSettingsWindowCommand { get; private set; }
-        public DelegateCommand OpenDiffExtractionSettingsWindowCommand { get; private set; }
-        public DelegateCommand<FileDialogParameter> OpenFileDialogCommand { get; private set; }
-        public DelegateCommand<string> OpenAsSrcFileCommand { get; private set; }
-        public DelegateCommand<string> OpenAsDstFileCommand { get; private set; }
-        public DelegateCommand<string> OpenFileSetCommand { get; private set; }
-        public DelegateCommand<string> ChangeLanguageCommand{ get; private set; }
+        public RelayCommand<ExternalCommand> ExecuteExternalCommandCommand { get; private set; }
+        public RelayCommand OpenExternalCommandsWindowCommand { get; private set; }
+        public RelayCommand OpenFileSettingsWindowCommand { get; private set; }
+        public RelayCommand OpenDiffExtractionSettingsWindowCommand { get; private set; }
+        public RelayCommand<FileDialogParameter> OpenFileDialogCommand { get; private set; }
+        public RelayCommand<string> OpenAsSrcFileCommand { get; private set; }
+        public RelayCommand<string> OpenAsDstFileCommand { get; private set; }
+        public RelayCommand<string> OpenFileSetCommand { get; private set; }
+        public RelayCommand<string> ChangeLanguageCommand{ get; private set; }
 
         public MainWindowViewModel(ContentControl content)
         {
@@ -85,15 +85,15 @@ namespace ExcelMerge.GUI.ViewModels
 
             Refresh();
 
-            ExecuteExternalCommandCommand = new DelegateCommand<ExternalCommand>((cmd) => cmd.Execute(false));
-            OpenExternalCommandsWindowCommand = new DelegateCommand(OpenExternalCommandsWindow);
-            OpenFileSettingsWindowCommand = new DelegateCommand(OpenFileSettingsWindow);
-            OpenDiffExtractionSettingsWindowCommand = new DelegateCommand(OpenDiffExtractionSettingWindow);
-            OpenFileDialogCommand = new DelegateCommand<FileDialogParameter>(OpenFileDialog);
-            OpenAsSrcFileCommand = new DelegateCommand<string>(OpenAsSrcFile);
-            OpenAsDstFileCommand = new DelegateCommand<string>(OpenAsDstFile);
-            OpenFileSetCommand = new DelegateCommand<string>(OpenFileSet);
-            ChangeLanguageCommand = new DelegateCommand<string>(ChangeLanguage);
+            ExecuteExternalCommandCommand = new RelayCommand<ExternalCommand>((cmd) => cmd.Execute(false));
+            OpenExternalCommandsWindowCommand = new RelayCommand(OpenExternalCommandsWindow);
+            OpenFileSettingsWindowCommand = new RelayCommand(OpenFileSettingsWindow);
+            OpenDiffExtractionSettingsWindowCommand = new RelayCommand(OpenDiffExtractionSettingWindow);
+            OpenFileDialogCommand = new RelayCommand<FileDialogParameter>(OpenFileDialog);
+            OpenAsSrcFileCommand = new RelayCommand<string>(OpenAsSrcFile);
+            OpenAsDstFileCommand = new RelayCommand<string>(OpenAsDstFile);
+            OpenFileSetCommand = new RelayCommand<string>(OpenFileSet);
+            ChangeLanguageCommand = new RelayCommand<string>(ChangeLanguage);
 
             App.Instance.Setting.PropertyChanged += Setting_PropertyChanged;
         }

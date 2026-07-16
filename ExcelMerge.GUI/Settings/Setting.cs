@@ -1,8 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using YamlDotNet.Serialization;
-using SKCore.Runtime.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace ExcelMerge.GUI.Settings
 {
@@ -28,7 +29,14 @@ namespace ExcelMerge.GUI.Settings
 
         public virtual T DeepClone()
         {
-            return SerializationUtility.DeepClone(this as T);
+            var serializer = new SerializerBuilder()
+                .WithNamingConvention(UnderscoredNamingConvention.Instance)
+                .Build();
+            var deserializer = new DeserializerBuilder()
+                .WithNamingConvention(UnderscoredNamingConvention.Instance)
+                .Build();
+            var yaml = serializer.Serialize(this as T);
+            return deserializer.Deserialize<T>(yaml);
         }
 
         public virtual bool Ensure(bool isChanged = false)

@@ -1,11 +1,11 @@
 ﻿using System.Windows;
-using Prism.Mvvm;
-using Prism.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public abstract class SettingCollectionWindowViewModelBase<T> : BindableBase where T : Setting<T>, new()
+    public abstract class SettingCollectionWindowViewModelBase<T> : ObservableObject where T : Setting<T>, new()
     {
         protected T selectedItem;
 
@@ -23,21 +23,21 @@ namespace ExcelMerge.GUI.ViewModels
             private set { SetProperty(ref isDirty, value); }
         }
 
-        public DelegateCommand<T> EditCommand { get; private set; }
-        public DelegateCommand<T> RemoveCommand { get; private set; }
-        public DelegateCommand ApplyCommand { get; private set; }
-        public DelegateCommand ResetCommand { get; private set; }
-        public DelegateCommand<Window> DoneCommand { get; private set; }
+        public RelayCommand<T> EditCommand { get; private set; }
+        public RelayCommand<T> RemoveCommand { get; private set; }
+        public RelayCommand ApplyCommand { get; private set; }
+        public RelayCommand ResetCommand { get; private set; }
+        public RelayCommand<Window> DoneCommand { get; private set; }
 
         public SettingCollectionWindowViewModelBase()
         {
             Reset();
 
-            EditCommand = new DelegateCommand<T>(Edit);
-            RemoveCommand = new DelegateCommand<T>(Remove);
-            ApplyCommand = new DelegateCommand(Apply);
-            ResetCommand = new DelegateCommand(Reset);
-            DoneCommand = new DelegateCommand<Window>(Done);
+            EditCommand = new RelayCommand<T>(Edit);
+            RemoveCommand = new RelayCommand<T>(Remove);
+            ApplyCommand = new RelayCommand(Apply);
+            ResetCommand = new RelayCommand(Reset);
+            DoneCommand = new RelayCommand<Window>(Done);
         }
 
         protected void Edit(T item)

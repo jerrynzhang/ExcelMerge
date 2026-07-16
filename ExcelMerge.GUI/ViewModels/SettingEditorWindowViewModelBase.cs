@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows;
-using Prism.Mvvm;
-using Prism.Commands;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ExcelMerge.GUI.Settings;
 
 namespace ExcelMerge.GUI.ViewModels
 {
-    public class SettingEditorWindowViewModelBase<T> : BindableBase where T : Setting<T>
+    public class SettingEditorWindowViewModelBase<T> : ObservableObject where T : Setting<T>
     {
         public delegate bool ValidateSettingDelegate(T setting, ref string error);
 
@@ -21,8 +21,8 @@ namespace ExcelMerge.GUI.ViewModels
 
         public bool IsCancelled { get; private set; } = true;
 
-        public DelegateCommand<Window> CancelCommand { get; private set; }
-        public DelegateCommand<Window> DoneCommand { get; private set; }
+        public RelayCommand<Window> CancelCommand { get; private set; }
+        public RelayCommand<Window> DoneCommand { get; private set; }
 
         public SettingEditorWindowViewModelBase(T setting)
         {
@@ -31,14 +31,14 @@ namespace ExcelMerge.GUI.ViewModels
 
             Setting = setting;
 
-            CancelCommand = new DelegateCommand<Window>((w) =>
+            CancelCommand = new RelayCommand<Window>((w) =>
             {
                 IsCancelled = true;
 
                 w.Close();
             });
 
-            DoneCommand = new DelegateCommand<Window>((w) =>
+            DoneCommand = new RelayCommand<Window>((w) =>
             {
                 string error = string.Empty;
                 if (ValidateSettingCallback != null && !ValidateSettingCallback(Setting, ref error))
